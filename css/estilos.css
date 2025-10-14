@@ -9,25 +9,30 @@ margin: auto;
 
 *{
 font-size: 30px;
-padding: 10px;
+padding: 20px auto;
+margin: 20px auto;
 background-color: bisque;
 }
 
 
 .modulo, th {
+text-align: center;
 background-color: lightblue;
 }
 
 .c{
 background-color: khaki;
+text-align: center;
 }
 
 .ta{
 background-color: khaki;
+text-align: center;
 }
 
 .md{
 background-color: khaki;
+text-align: center;
 }
 
 td.video {
@@ -37,10 +42,12 @@ width: 350px;
 
 td.fonte {
 width: 100px;
+text-align: center;
 }
 
 input, button {
-    background-color: plum;
+text-align: center;
+background-color: plum;
 }
 
 
@@ -52,15 +59,15 @@ input, button {
 
 .h1, h2{
 background-color: lightblue;
-font-size: 30;
+font-size: 25;
 text-align: center;
 }
 
 .p{
 background-color: lightblue;
-font-size: 30;
-
-
+font-size: 25;
+text-align: center;
 }
+
 
 
