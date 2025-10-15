@@ -10,7 +10,8 @@ border: 3px solid  white;
 text-align: center;
 }
 table {
-width: 120px;
+width: 240px;
+margin: 0 auto;
 }
 
 .modulo, th{
@@ -69,6 +70,7 @@ background-color: lightblue;
 font-size: 25;
 
 }
+
 
 
 
