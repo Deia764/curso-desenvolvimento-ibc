@@ -4,7 +4,6 @@ const formulario = document.getElementById("formulario") as HTMLFormElement;
 const txtNome = document.getElementById("txtNome") as HTMLInputElement;
 const txtEmail = document.getElementById("txtEmail") as HTMLInputElement;
 const txtMensagem = document.getElementById("txtMensagem") as HTMLTextAreaElement;
-const btnSubmit = document.getElementById("btnSubmit") as HTMLButtonElement;
 const btnLimpar = document.getElementById("btnLimpar") as HTMLButtonElement;
 const divMensagem = document.getElementById("divMensagem") as HTMLDivElement;
 const tabelaMensagens = document.getElementById("tabelaMensagens")!.querySelector("tbody") as HTMLTableSectionElement;
@@ -41,7 +40,7 @@ formulario.addEventListener("submit", (e: Event) => {
   const email = txtEmail.value.trim();
   const mensagem = txtMensagem.value.trim();
 
-  if(!nome || !email || !mensagem) {
+  if(!nome || !email || !mensagem){
     exibirMensagem("red", "Todos os campos são obrigatórios!");
     return;
   }
