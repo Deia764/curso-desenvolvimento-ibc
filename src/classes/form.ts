@@ -1,50 +1,42 @@
-
 export class Form {
-  public id: string;
+  id: string;
+  nome: string;
+  email: string;
+  mensagem: string;
 
-  constructor(
-    public nome: string,
-    public email: string,
-    public mensagem: string
-  ) {
-    this.id = crypto.randomUUID();
+  constructor(nome: string, email: string, mensagem: string) {
+    this.id = new Date().getTime().toString();
     this.nome = nome;
     this.email = email;
     this.mensagem = mensagem;
   }
 
   cadastrar(): void {
-    const listaForm: Form[] = JSON.parse(localStorage.getItem("listaForm") || "[]");
-    listaForm.push(this);
-    localStorage.setItem("listaForm", JSON.stringify(listaForm));
+    let lista = Form.listar();
+    lista.push(this);
+    localStorage.setItem("listaForm", JSON.stringify(lista));
   }
 
   static listar(): Form[] {
-    const listaForm: Form[] = JSON.parse(localStorage.getItem("listaForm") || "[]");
-    return listaForm;
-  }
-
-  static excluir(id: string): void {
-    let listaForm: Form[] = JSON.parse(localStorage.getItem("listaForm") || "[]");
-    listaForm = listaForm.filter((form: Form) => form.id !== id);
-    localStorage.setItem("listaForm", JSON.stringify(listaForm));
-  }
-
-  static alterar(formAlterado: Form): void {
-    let listaForm: Form[] = JSON.parse(localStorage.getItem("listaForm") || "[]");
-    listaForm = listaForm.map((form: Form) => {
-      if (form.id === formAlterado.id) {
-        return formAlterado;
-      }
-      return form;
-    });
-    localStorage.setItem("listaForm", JSON.stringify(listaForm));
+    const dados = localStorage.getItem("listaForm");
+    return dados ? JSON.parse(dados) : [];
   }
 
   static buscar(id: string): Form | undefined {
-    const listaForm: Form[] = this.listar();
-    const form = listaForm.find((form) => form.id === id);
-    return form;
+    return Form.listar().find(f => f.id === id);
+  }
+
+  static alterar(formAlterado: Form): void {
+    let lista = Form.listar();
+    const index = lista.findIndex(f => f.id === formAlterado.id);
+    if (index !== -1) {
+      lista[index] = formAlterado;
+      localStorage.setItem("listaForm", JSON.stringify(lista));
+    }
+  }
+
+  static excluir(id: string): void {
+    let lista = Form.listar().filter(f => f.id !== id);
+    localStorage.setItem("listaForm", JSON.stringify(lista));
   }
 }
-
