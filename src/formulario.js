@@ -1,10 +1,9 @@
-  import { Form } from "./form.js";
+import { Form } from "./form.js";
 
 var formulario = document.getElementById("formulario");
 var txtNome = document.getElementById("txtNome");
 var txtEmail = document.getElementById("txtEmail");
 var txtMensagem = document.getElementById("txtMensagem");
-var btnSubmit = document.getElementById("btnSubmit");
 var btnLimpar = document.getElementById("btnLimpar");
 var divMensagem = document.getElementById("divMensagem");
 var tabelaMensagens = document.getElementById("tabelaMensagens").querySelector("tbody");
