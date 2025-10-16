@@ -1,22 +1,24 @@
-export var Form = /** @class */ (function () {
-    function Form(nome, email, mensagem) {
-        this.id = new Date().getTime().toString();
+export class Form {
+    constructor(nome, email, mensagem) {
         this.nome = nome;
         this.email = email;
         this.mensagem = mensagem;
+        this.id = new Date().getTime().toString();
     }
-    Form.prototype.cadastrar = function () {
-        var lista = Form.listar();
-        lista.push(this);
-        localStorage.setItem("listaForm", JSON.stringify(lista));
-    };
-    Form.listar = function () {
-        var dados = localStorage.getItem("listaForm");
-        return dados ? JSON.parse(dados) : [];
-    };
-    Form.excluir = function (id) {
-        var lista = Form.listar().filter(function (f) { return f.id !== id; });
-        localStorage.setItem("listaForm", JSON.stringify(lista));
-    };
-    return Form;
-}());
+
+    cadastrar() {
+        const listaForm = JSON.parse(localStorage.getItem("listaForm") || "[]");
+        listaForm.push(this);
+        localStorage.setItem("listaForm", JSON.stringify(listaForm));
+    }
+
+    static listar() {
+        return JSON.parse(localStorage.getItem("listaForm") || "[]");
+    }
+
+    static excluir(id) {
+        let listaForm = JSON.parse(localStorage.getItem("listaForm") || "[]");
+        listaForm = listaForm.filter(form => form.id !== id);
+        localStorage.setItem("listaForm", JSON.stringify(listaForm));
+    }
+}
