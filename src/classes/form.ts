@@ -23,7 +23,7 @@ export class Form {
   }
 
   static excluir(id: string): void {
-    let lista = Form.listar().filter(f => f.id !== id);
+    const lista = Form.listar().filter(f => f.id !== id);
     localStorage.setItem("listaForm", JSON.stringify(lista));
   }
 }
