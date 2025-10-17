@@ -1,69 +1,65 @@
-import { Form } from "./form.js";
+;import { Form } from "./form.js";
 
-const formContato = document.getElementById("formContato");
+const formContato = document.getElementById("formulario");
 const txtNome = document.getElementById("txtNome");
 const txtEmail = document.getElementById("txtEmail");
 const txtMensagem = document.getElementById("txtMensagem");
+const btnEnviar = document.getElementById("btnEnviar");
 const btnLimpar = document.getElementById("btnLimpar");
 const divMensagem = document.getElementById("divMensagem");
-const tabela = document.getElementById("tabelaMensagens");
+const tabelaMensagens = document.getElementById("tabelaMensagens");
 
-function exibirMensagem(color, msg) {
-    divMensagem.style.color = color;
-    divMensagem.textContent = msg;
-    setTimeout(() => (divMensagem.textContent = ""), 3000);
+function exibirMensagem(cor, msg) {
+  divMensagem.style.color = cor;
+  divMensagem.textContent = msg;
 }
 
-function renderizarTabela() {
-    const lista = Form.listar();
-    const tbody = tabela.querySelector("tbody");
-    tbody.innerHTML = "";
+function atualizarTabela() {
+  const lista = Form.listar();
+  tabelaMensagens.innerHTML = "";
 
-    lista.forEach((item) => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td>${item.nome}</td>
-            <td>${item.email}</td>
-            <td>${item.mensagem}</td>
-            <td><button data-id="${item.id}">Excluir</button></td>
-        `;
-        tbody.appendChild(tr);
-    });
+  lista.forEach((form) => {
+    const linha = document.createElement("tr");
+    linha.innerHTML = `
+      <td>${form.nome}</td>
+      <td>${form.email}</td>
+      <td>${form.mensagem}</td>
+      <td><button data-id="${form.id}" class="btnExcluir">Excluir</button></td>
+    `;
+    tabelaMensagens.appendChild(linha);
+  });
 
-    tabela.querySelectorAll("button").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            const id = btn.getAttribute("data-id");
-            if (id) {
-                Form.excluir(id);
-                renderizarTabela();
-            }
-        });
+  document.querySelectorAll(".btnExcluir").forEach((botao) => {
+    botao.addEventListener("click", (e) => {
+      const id = e.target.getAttribute("data-id");
+      Form.excluir(id);
+      atualizarTabela();
     });
+  });
 }
 
-formContato.addEventListener("submit", (event) => {
-    event.preventDefault();
+btnEnviar.addEventListener("click", () => {
+  const nome = txtNome.value.trim();
+  const email = txtEmail.value.trim();
+  const mensagem = txtMensagem.value.trim();
 
-    const nome = txtNome.value.trim();
-    const email = txtEmail.value.trim();
-    const mensagem = txtMensagem.value.trim();
+  if (!nome || !email || !mensagem) {
+    exibirMensagem("red", "Todos os campos são obrigatórios!");
+    return;
+  }
 
-    if (!nome || !email || !mensagem) {
-        exibirMensagem("red", "Todos os campos são obrigatórios!");
-        return;
-    }
+  const novoForm = new Form(nome, email, mensagem);
+  novoForm.cadastrar();
+  exibirMensagem("green", "Mensagem enviada com sucesso!");
 
-    const novoForm = new Form(nome, email, mensagem);
-    novoForm.cadastrar();
-
-    exibirMensagem("green", "Mensagem enviada com sucesso!");
-    formContato.reset();
-    renderizarTabela();
+  formContato.reset();
+  atualizarTabela();
 });
 
 btnLimpar.addEventListener("click", () => {
-    formContato.reset();
-    divMensagem.textContent = "";
+  formContato.reset();
+  divMensagem.textContent = "";
 });
 
-renderizarTabela();
+window.onload = atualizarTabela;
+
