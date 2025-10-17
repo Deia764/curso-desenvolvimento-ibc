@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
   <meta charset="UTF-8">
   <title>Formulário de Contato</title>
@@ -10,6 +10,7 @@
 
   <div id="divMensagem" role="alert" aria-live="assertive"></div>
 
+  <div>
   <form id="formulario">
     <div>
       <label for="txtNome">* Nome:</label>
@@ -27,12 +28,14 @@
     </div>
 
     <div>
-      <button type="button" id="btnEnviar">Enviar</button>
-      <button type="button" id="btnLimpar">Limpar</button>
+    <button type="button" id="btnEnviar">Enviar</button>
+    <button type="button" id="btnLimpar">Limpar</button>
     </div>
+    
   </form>
-
-  <table border="1">
+  </div>
+  
+  <table>
     <thead>
       <tr>
         <th>Nome</th>
@@ -46,6 +49,7 @@
 
   <a href="contato.html">Voltar</a>
 
+  <script type="module" src="form.js"></script>
   <script type="module" src="formulario.js"></script>
 </body>
 </html>
