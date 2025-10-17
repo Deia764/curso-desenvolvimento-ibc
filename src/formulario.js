@@ -1,4 +1,4 @@
-;import { Form } from "./form.js";
+import { Form } from "./form.js";
 
 const formContato = document.getElementById("formulario");
 const txtNome = document.getElementById("txtNome");
@@ -62,4 +62,3 @@ btnLimpar.addEventListener("click", () => {
 });
 
 window.onload = atualizarTabela;
-
